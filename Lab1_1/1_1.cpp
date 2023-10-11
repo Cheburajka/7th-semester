@@ -8,12 +8,14 @@
  */
 void fillArrayRandom(int* arr, const size_t size, const int min, const int max);
 
+
 /**
  * Get numbers of array.
  * @param size Size of array.
  * @param array Dinamic array.
  */
 void outputArray(int* arr, const size_t size);
+
 
 /**
  * Get bubble sorting of array.
@@ -29,12 +31,14 @@ void bubbleSort(int* arr, const size_t size);
  */
 int findMin(int* arr, const size_t size);
 
+
 /**
  * Get max numbers of array.
  * @param size Size of array.
  * @param array Dinamic array.
  */
 int findMax(int* arr, const size_t size);
+
 
 int main()
 {
@@ -52,6 +56,7 @@ int main()
 
 	int* arr = new int[size];
 	fillArrayRandom(arr, size, minNum, maxNum);
+
 
 	std::cout << "\nYour array: ";
 	outputArray(arr, size);
@@ -75,6 +80,7 @@ int main()
 	return 0;
 }
 
+
 void fillArrayRandom(int* arr, const size_t size, const int min, const int max)
 {
 	std::random_device rd;
@@ -87,6 +93,7 @@ void fillArrayRandom(int* arr, const size_t size, const int min, const int max)
 	}
 }
 
+
 void outputArray(int* arr, const size_t size)
 {
 	for (size_t i = 0; i < size; i++)
@@ -95,6 +102,7 @@ void outputArray(int* arr, const size_t size)
 	}
 	std::cout << std::endl;
 }
+
 
 void bubbleSort(int* arr, const size_t size)
 {
@@ -112,6 +120,7 @@ void bubbleSort(int* arr, const size_t size)
 	}
 }
 
+
 int findMin(int* arr, const size_t size)
 {
 	int min = arr[0];
@@ -125,6 +134,7 @@ int findMin(int* arr, const size_t size)
 	}
 	return min;
 }
+
 
 int findMax(int* arr, const size_t size)
 {
