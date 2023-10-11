@@ -61,7 +61,8 @@ int main()
 	outputArray(arr, size);
 
 	int Min = findMin(arr, size);
-	std::cout << "\nMinimum of array: " << Min << std::endl;
+	std::cout << "\nMinimum of array: " << Min << std::endl;       
+
 	int Max = findMax(arr, size);
 	std::cout << "Maximum of array: " << Max << std::endl;
 
