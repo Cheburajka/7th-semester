@@ -1,134 +1,140 @@
 #include <iostream>
 #include <random>
 
-using namespace std;
+/**
+ * Set numbers in a array.
+ * @param size Size of array.
+ * @param array Dinamic array.
+ */
+void fillArrayRandom(int* arr, const size_t size, const int min, const int max);
 
 /**
-@ Функция для заполнения массива случайными числами
-*/
-void fillArrayRandom(int* arr, int size, int min, int max) 
-{
-    random_device rd;
-    mt19937 gen(rd());
-    const uniform_int_distribution<int> uniformIntDistribution(min, max);
-
-    for (int i = 0; i < size; i++)
-    {
-        arr[i] = uniformIntDistribution(gen);
-    }
-}
+ * Get numbers of array.
+ * @param size Size of array.
+ * @param array Dinamic array.
+ */
+void outputArray(int* arr, const size_t size);
 
 /**
-@ Функция для вывода массива
-*/
-void outputArray(const int* arr, int size)
-{
-    for (int i = 0; i < size; i++) 
-    {
-        cout << arr[i] << " ";
-    }
-    cout << endl;
-}
+ * Get bubble sorting of array.
+ * @param size Size of array.
+ * @param array Dinamic array.
+ */
+void bubbleSort(int* arr, const size_t size);
 
 /**
-@ Функция для выполнения алгоритма пузырьковой сортировки массива
-*/
-void bubbleSort(int* arr, int size)
-{
-    for (int i = 0; i < size - 1; i++)
-    {
-        for (int j = 0; j < size - i - 1; j++)
-        {
-            if (arr[j] > arr[j + 1])
-            {
-                int temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
-            }
-        }
-    }
-}
+ * Get min numbers of array.
+ * @param size Size of array.
+ * @param array Dinamic array.
+ */
+int findMin(int* arr, const size_t size);
 
-/** 
-@ Функция для поиска минимального значения в массиве
-*/
-int findMin(const int* arr, int size) 
-{
-    if (size <= 0)
-    {
-        cout << ("Array size must be greater than 0");
-    }
-
-    int min = arr[0];
-
-    for (int i = 1; i < size; i++) 
-    {
-        if (arr[i] < min) 
-        {
-            min = arr[i];
-        }
-    }
-    return min;
-}
-
-/** 
-@ Функция для поиска максимального значения в массиве
-*/
-int findMax(const int* arr, int size)
-{
-    if (size <= 0) 
-    {
-        cout << ("Array size must be greater than 0");
-    }
-
-    int max = arr[0];
-    
-    for (int i = 1; i < size; i++)
-    {
-        if (arr[i] > max) 
-        {
-            max = arr[i];
-        }
-    }
-    return max;
-}
+/**
+ * Get max numbers of array.
+ * @param size Size of array.
+ * @param array Dinamic array.
+ */
+int findMax(int* arr, const size_t size);
 
 int main()
 {
-    int size;
-    
-    // Ввод размера массива
-    cout << "Enter size of array: ";
-    cin >> size;
-   
-    // Ввод минимального и максимального значения для генерации случайных чисел
-    cout << "\nEnter minimum number: ";
-    int minNum;
-    cin >> minNum;
-    cout << "Enter maximum number: ";
-    int maxNum;
-    cin >> maxNum;
+	int size;
 
-    // Создание массива и заполнение его случайными числами
-    int* arr = new int[size];
-    fillArrayRandom(arr, size, minNum, maxNum);
-    
-    // Вывод массива
-    cout << "\nYour array: ";
-    outputArray(arr, size);
-    
-    // Сортировка массив с помощью пузырька
-    bubbleSort(arr, size);
-    cout << "\nYour array sorted: ";
-    outputArray(arr, size);
-    
-    // Нахождение и вывод минимального и максимального значения в массиве
-    int Min = findMin(arr, size);
-    cout << "\nMinimum of array: " << Min << endl;
-    int Max = findMax(arr, size);
-    cout << "Maximum of array: " << Max << endl;
+	std::cout << "Enter size of array: ";
+	std::cin >> size;
 
-    delete[] arr;
-    
-    return 0;
+	std::cout << "\nEnter minimum number: ";
+	int minNum;
+	std::cin >> minNum;
+	std::cout << "Enter maximum number: ";
+	int maxNum;
+	std::cin >> maxNum;
+
+	int* arr = new int[size];
+	fillArrayRandom(arr, size, minNum, maxNum);
+
+	std::cout << "\nYour array: ";
+	outputArray(arr, size);
+
+	bubbleSort(arr, size);
+	std::cout << "\nYour array sorted: ";
+	outputArray(arr, size);
+
+	int Min = findMin(arr, size);
+	std::cout << "\nMinimum of array: " << Min << std::endl;
+	int Max = findMax(arr, size);
+	std::cout << "Maximum of array: " << Max << std::endl;
+
+	if (arr != nullptr)
+	{
+		delete[] arr;
+		arr = nullptr;
+	}
+
+	return 0;
+}
+
+void fillArrayRandom(int* arr, const size_t size, const int min, const int max)
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> uniformIntDistribution(min, max);
+
+	for (size_t i = 0; i < size; i++)
+	{
+		arr[i] = uniformIntDistribution(gen);
+	}
+}
+
+void outputArray(int* arr, const size_t size)
+{
+	for (size_t i = 0; i < size; i++)
+	{
+		std::cout << arr[i] << " ";
+	}
+	std::cout << std::endl;
+}
+
+void bubbleSort(int* arr, const size_t size)
+{
+	for (size_t i = 0; i < size - 1; i++)
+	{
+		for (size_t j = 0; j < size - i - 1; j++)
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				int temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+		}
+	}
+}
+
+int findMin(int* arr, const size_t size)
+{
+	int min = arr[0];
+
+	for (size_t i = 1; i < size; i++)
+	{
+		if (arr[i] < min)
+		{
+			min = arr[i];
+		}
+	}
+	return min;
+}
+
+int findMax(int* arr, const size_t size)
+{
+	int max = arr[0];
+
+	for (size_t i = 1; i < size; i++)
+	{
+		if (arr[i] > max)
+		{
+			max = arr[i];
+		}
+	}
+	return max;
 }

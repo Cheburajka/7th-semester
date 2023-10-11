@@ -1,0 +1,96 @@
+#include <iostream>
+#include <random>
+#include <stdexcept>
+
+class RandomArray {
+public:
+    RandomArray(int size, int min, int max) : size(size), min(min), max(max) {
+        if (size <= 0) {
+            throw std::out_of_range("Error, enter a correct size");
+        }
+        arr = new int[size];
+        fillArrayWithRandom();
+    }
+
+    ~RandomArray() {
+        delete[] arr;
+    }
+
+    void display() const {
+        for (int i = 0; i < size; i++) {
+            std::cout << arr[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    int findMin() const {
+        if (size <= 0) {
+            throw std::invalid_argument("Array size must be greater than 0");
+        }
+
+        int minVal = arr[0];
+        for (int i = 1; i < size; i++) {
+            if (arr[i] < minVal) {
+                minVal = arr[i];
+            }
+        }
+        return minVal;
+    }
+
+    int findMax() const {
+        if (size <= 0) {
+            throw std::invalid_argument("Array size must be greater than 0");
+        }
+
+        int maxVal = arr[0];
+        for (int i = 1; i < size; i++) {
+            if (arr[i] > maxVal) {
+                maxVal = arr[i];
+            }
+        }
+        return maxVal;
+    }
+
+private:
+    int size;
+    int min;
+    int max;
+    int* arr;
+
+    void fillArrayWithRandom() {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        const std::uniform_int_distribution<int> uniformIntDistribution(min, max);
+
+        for (int i = 0; i < size; i++) {
+            arr[i] = uniformIntDistribution(gen);
+        }
+    }
+};
+
+int main() {
+    int size, min, max;
+
+    std::cout << "Enter size of array: ";
+    std::cin >> size;
+
+    std::cout << "Enter minimum number: ";
+    std::cin >> min;
+
+    std::cout << "Enter maximum number: ";
+    std::cin >> max;
+
+    try {
+        RandomArray randomArray(size, min, max);
+
+        std::cout << "Your array: ";
+        randomArray.display();
+
+        std::cout << "Minimum of array: " << randomArray.findMin() << std::endl;
+        std::cout << "Maximum of array: " << randomArray.findMax() << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
+
+    return 0;
+}
