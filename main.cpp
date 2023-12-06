@@ -1,30 +1,27 @@
-#include<iostream>
-#include "BinaryTreeSearch.h"
+#include "BinarySearchTree.h"
+
+#include <iostream>
+
+void Check();
 
 int main()
 {
-    BinarySearchTree BST;
-    BST.Insert(5);
-    BST.Insert(15);
-    BST.Insert(10);
-    BST.Insert(3);
-    BST.Insert(2);
-    BST.Insert(75);
-    BST.Insert(4);
-    BST.Insert(65);
-    BST.Insert(77);
-    BST.Insert(76);
-    BST.Insert(79);
-    BST.Traverse();
+	Check();
+	return 0;
+}
 
-    std::cout << "____________________________" << std::endl;
-    std::cout << std::endl;
-    BST.Find(2);
-    BST.Find(75);
-    BST.Find(13);
-    std::cout << std::endl;
-    std::cout << "____________________________" << std::endl;
-
-    BST.Delete(75);
-    BST.Traverse();
+void Check()
+{
+	P_D_Tree::BinarySearchTree<int> BST;
+	BST.Add(7);
+	BST.Add(10);
+	BST.Add(8);
+	BST.Add(11);
+	BST.Add(9);
+	std::cout << "Binary tree: " << BST.InOrderPrint();
+	std::cout << "\nSize:" << BST.GetSize();
+	BST.Remove(8);
+	std::cout << "\nBinary tree after delete node: " << BST.InOrderPrint();
+	bool has_val = BST.HasValue(8);
+	std::cout << "\nHas value 8: " << has_val;
 }
