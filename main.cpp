@@ -1,5 +1,4 @@
 #include "BinarySearchTree.h"
-
 #include <iostream>
 
 void Check();

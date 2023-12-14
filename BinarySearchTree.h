@@ -3,7 +3,6 @@
 #include <vector>
 #include <sstream>
 #include <exception>
-#include <iterator>
 
 namespace P_D_Tree
 {
@@ -14,140 +13,39 @@ namespace P_D_Tree
 	class BinarySearchTree
 	{
 	private:
-		/**
-		 * @brief sort by data
-		*/
 		std::vector<T> values;
-		
-		/**
-		 * @brief Recurse form values
-		 * @param current node, from what we start values formation
-		*/
+
 		void InOrder(Node<T>* node);
-		/**
-		 * @brief recurse call form values
-		*/
 		void MakeValues();
-		/**
-		 * @brief Recurse delete tree
-		 * @param current - by default root
-		*/
 		void InOrderRemove(Node<T>* node);
 	protected:
-		/**
-		 * @brief root node
-		*/
 		Node<T>* root;
-		/**
-		 * @brief number of nodes in tree
-		*/
 		size_t size;
-		/**
-		 * @brief insert new node
-		 * @param value - value of new node
-		 * @return true/false result of working method(sussess or fail)
-		*/
+
 		Node<T>* Insert(Node<T>* current, Node<T>* node, Node<T>* parent);
-		/**
-		 * @brief find node by value
-		 * @param current - node for start search
-		 * @param target - value of node target
-		 * @return adress of node / nullptr, if not exist
-		*/
 		Node<T>* Find(Node<T>* node, const T& value) const noexcept;
-		/**
-		 * @brief find node with min data
-		 * @param current - node from what we start search
-		 * @return adress of min node
-		*/
 		Node<T>* FindMin(Node<T>* node);
-		/**
-		 * @brief find node with max data
-		 * @param current - node from what we start search
-		 * @return adress of min node
-		*/
 		Node<T>* FindMax(Node<T>* node);
-		/**
-		 * @brief Change current node on son.
-		 * @param deleted - old node
-		 * @param son - new node
-		*/
+
 		void Transplant(Node<T>* deleted, Node<T>* son);
-		/**
-		 * @brief swap nodes
-		 * @param other tree
-		*/
 		void Swap(BinarySearchTree& other) noexcept;
 
 	public:
-		/**
-		 * @brief default constructor
-		*/
 		BinarySearchTree();
-		/**
-		 * @brief param constructor
-		 * @param list of values for node in bst
-		*/
 		BinarySearchTree(std::initializer_list<T> list);
-		/**
-		 * @brief copy constructor
-		 * @param other - tree from what we copy
-		*/
 		BinarySearchTree(const BinarySearchTree<T>& other);
-		/**
-		 * @brief move constructor
-		 * @param other - tree from what we move
-		*/
 		BinarySearchTree(BinarySearchTree<T>&& other) noexcept;
-		/**
-		 * @brief copy operator
-		 * @param other - tree from what we copy
-		*/
 		BinarySearchTree& operator=(const BinarySearchTree<T>& other);
-		/**
-		 * @brief move operator
-		 * @param other - tree from what we move
-		*/
 		BinarySearchTree& operator=(BinarySearchTree<T>&& other) noexcept;
-		/**
-		 * @brief Destructor
-		*/
 		virtual ~BinarySearchTree();
-		/**
-		 * @brief insert new node
-		 * @param value - value of new node
-		 * @return true/false result of working method(sussess or fail)
-		*/
 		bool Add(const T& value);
-		/**
-		 * @brief remove selected node
-		 * @param value - value of node for delete
-		 * @return true/false result of working method(sussess or fail)
-		*/
 		bool Remove(const T& value);
-		/**
-		 * @brief Exist node with value
-		 * @param value - value of node.
-		 * @return true/false result of working method(sussess or fail)
-		*/
 		bool HasValue(const T& value) const noexcept;
-		/**
-		 * @brief Method for check exist tree or not(exist root or not)
-		 * @return true/false result of working method(sussess or fail)
-		*/
 		bool IsEmpty() const noexcept;
-		/**
-		 * @brief get number of nodes in tree
-		*/
 		size_t GetSize() const noexcept;
-		/**
-		 * @brief Output of tree values
-		 * @return string with values
-		*/
 		std::string InOrderPrint() const noexcept;
 	};
 }
-
 template<typename T>
 void P_D_Tree::BinarySearchTree<T>::InOrder(Node<T>* node)
 {
@@ -225,7 +123,7 @@ void P_D_Tree::BinarySearchTree<T>::Transplant(Node<T>* deleted, Node<T>* son)
 {
 	if (deleted == son) { return; }
 
-	int TreeData = son->data;
+	T TreeData = son->data;
 	Node<T>* TreeParent = son->parent;
 	Node<T>* TreeRight = son->right;
 	delete son;
@@ -251,13 +149,13 @@ P_D_Tree::BinarySearchTree<T>::BinarySearchTree() : root{ nullptr }, size{ 0 } {
 template <typename T>
 P_D_Tree::BinarySearchTree<T>::BinarySearchTree(std::initializer_list<T> list) : BinarySearchTree()
 {
-	for (auto& it : list) { this->Add(it); }
+	for (auto& item : list) { this->Add(item); }
 }
 
 template <typename T>
 P_D_Tree::BinarySearchTree<T>::BinarySearchTree(const BinarySearchTree<T>& other) : BinarySearchTree()
 {
-	for (auto& it : other) { this->Add(it); }
+	for (auto& item : other) { this->Add(item); }
 }
 
 template <typename T>
