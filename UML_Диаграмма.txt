@@ -1,0 +1,54 @@
+@startuml
+
+class Node
+{  
+-{field}T data
+-{field}Node* parent
+-{field}Node* left
+-{field}Node* right
++{method}Node()
++{method}Node(const T& value)
++{method}Node(const Node& node) = delete
++{method}Node& operator =(const Node& node) = delete
++{method}Node(Node&& node) noexcept = default
++{method}Node<T>& operator =(Node&& node) noexcept = default
++{method}~Node()
++{method}bool IsRoot() const noexcept
++{method}bool IsLeaf() const noexcept
++{method}friend auto operator <=>(const Node& l, const Node& r)
++{method}friend bool operator ==(const Node& l, const Node& r)
++{method}friend bool operator !=(const Node& l, const Node& r)
++{method}friend std::ostream& operator<<(std::ostream& stream, const Node& node)
+}
+
+class BinarySearchTree
+{
+-{field}std::vector<T> values
+-{method}void InOrder(Node<T>* node)
+-{method}void MakeValues()
+-{method}void InOrderRemove(Node<T>* node)
+-{field}Node<T>* root
+-{field}size_t size
+-{method}Node<T>* Insert(Node<T>* current, Node<T>* node, Node<T>* parent)
+-{method}Node<T>* Find(Node<T>* node, const T& value) const noexcept
+-{method}Node<T>* FindMin(Node<T>* node)
+-{method}Node<T>* FindMax(Node<T>* node)    
+-{method}void Transplant(Node<T>* deleted, Node<T>* son)
+-{method}void Swap(BinarySearchTree& other) noexcept
++{method}BinarySearchTree()
++{method}BinarySearchTree(std::initializer_list<T> list)
++{method}BinarySearchTree(const BinarySearchTree<T>& other)
++{method}BinarySearchTree(BinarySearchTree<T>&& other) noexcept
++{method}BinarySearchTree& operator=(const BinarySearchTree<T>& other)
++{method}BinarySearchTree& operator=(BinarySearchTree<T>&& other) noexcept
++{method}virtual ~BinarySearchTree()
++{method}bool Add(const T& value)
++{method}bool Remove(const T& value)
++{method}bool HasValue(const T& value) const noexcept
++{method}bool IsEmpty() const noexcept
++{method}size_t GetSize() const noexcept
++{method}std::string InOrderPrint() const noexcept
+}
+
+BinarySearchTree *-- Node
+@enduml
